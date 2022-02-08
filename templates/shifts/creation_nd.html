@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %} Creation {% endblock %}
+
+{% block content %}
+    <h2>Add new shifts</h2>
+
+    {% if error %}
+        <div class="alert danger">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form action="{{ url_for('shifts.create') }}" method="post">
+        <div class="container">
+            <label for="positionName"><b>Position</b></label>
+            <select name="position" id="form" required>
+                <option value="" selected disabled hidden>Choose here</option>
+                {% for position in positions %}
+                    <option value="{{ position.id }}">{{ position.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="hourlyWage"><b>Hourly Wage</b></label>
+            <input id="hourlyWage" name="hourlyWage" type="text" value="{{ data.hourlyWage }}"
+                   placeholder="Enter Hourly Wage" required>
+
+            <label for="currency"><b>Currency</b></label>
+            <select name="currency" id="form" required>
+                <option value="" selected disabled hidden>Choose here</option>
+                <option value="CZK" {{ 'selected' if data.currency == 'CZK' }}>CZK</option>
+                <option value="USD" {{ 'selected' if data.currency == 'USD' }}>USD</option>
+                <option value="KGS" {{ 'selected' if data.currency == 'KGS' }}>KGS</option>
+            </select>
+
+            <button type="submit" class="SignUpButton">Create shift</button>
+        </div>
+    </form>
+{% endblock %}

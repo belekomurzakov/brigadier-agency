@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %} Creation {% endblock %}
+
+{% block content %}
+    <h2>Add new positions</h2>
+
+    {% if error %}
+        <div class="alert danger">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form action="{{ url_for('positions.creation') }}" method="post">
+        <div class="container">
+            <label for="name"><b>Name</b></label>
+            <input id="name" name="name" type="text" value="{{ data.name }}"
+                   placeholder="Enter Position Name" required>
+
+            <label for="description"><b>Description</b></label>
+            <input id="description" name="description" type="text" value="{{ data.description }}"
+                   placeholder="Enter Description"
+                   required>
+
+            <label for="company"><b>Company</b></label>
+
+            <select name="company" id="company" required>
+              <option value="" selected disabled hidden>Choose here</option>
+                {% for item in items %}
+                    <option value="{{ item.companyName }}" {{ 'selected' if data.company == item.companyName }}>{{ item.companyName }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" class="SignUpButton">Create </button>
+        </div>
+    </form>
+{% endblock %}

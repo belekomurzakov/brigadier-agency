@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %} reports {% endblock %}
+
+{% block content %}
+    <h2>Report</h2>
+
+    <table id="companies">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Position</td>
+            <td>Description</td>
+            <td>Company</td>
+            <td>Sector</td>
+            <td>Shift Pay</td>
+            <td>Worked Hours</td>
+            <td>Currency</td>
+            <td>Registered user</td>
+            <td><a class="delete material-icons">delete</a></td>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% if reports | length == 0 %}
+            <div>There is no any shifts.</div>
+        {% else %}
+            {% for report in reports %}
+                <tr>
+                    <td>{{ report.id }}</td>
+                    <td><a href={{ url_for('positions.position_list') }}>{{ report.name }}</a></td>
+                    <td>{{ report.description }}</td>
+                    <td><a href={{ url_for('companies.partner_list') }}>{{ report.companyName }}</a></td>
+                    <td>{{ report.sector }}</td>
+                    <td>{{ report.shiftPay }}</td>
+                    <td>{{ report.workedHours }}</td>
+                    <td>{{ report.currencyCode }}</td>
+                    <td>{{ report.username }}</td>
+                    <td><a class="delete material-icons"
+                           href={{ url_for('shifts.delete', record_id = report.id,  object_type = 'report') }}>delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+        {% if current_user.role == "employee" %}
+            <tfoot>
+            <tr>
+                <td>Total</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ sum_shift_pay }}</td>
+                <td>{{ sum_worked_hours }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tfoot>
+        {% endif %}
+    </table>
+
+{% endblock %}

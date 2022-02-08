@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %} Shifts {% endblock %}
+
+{% block content %}
+    <h2>Shifts</h2>
+
+    {% if current_user.role != "employee" %}
+        <a href={{ url_for('shifts.creation') }}>
+            <button id="create" type="submit" class="SignUpButton">Create Shift</button>
+        </a>
+    {% else %}
+        <a href={{ url_for('shifts.report_list') }}>
+            <button id="create" type="submit" class="SignUpButton">Report</button>
+        </a>
+    {% endif %}
+
+    <table id="companies">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Position</td>
+            <td>Company</td>
+            <td>Start Time</td>
+            <td>End Time</td>
+            <td>Hourly Wage</td>
+            <td>Currency</td>
+            {% if current_user.role == "employee" %}
+                <td>Register</td>
+            {% endif %}
+            {% if current_user.role != "employee" %}
+                <td><a class="delete material-icons">delete</a></td>
+            {% endif %}
+        </tr>
+        </thead>
+
+        <tbody>
+        {% if shifts | length == 0 %}
+            <div>Žádné příspěvky.</div>
+        {% else %}
+            {% for shift in shifts %}
+                <tr>
+                    <td>{{ shift.id }}</td>
+                    <td><a href={{ url_for('positions.position_list') }}>{{ shift.name }}</a></td>
+                    <td><a href={{ url_for('companies.partner_list') }}>{{ shift.companyName }}</a></td>
+                    <td>{{ shift.sTime }}</td>
+                    <td>{{ shift.eTime }}</td>
+                    <td>{{ shift.hourlyWage }}</td>
+                    <td>{{ shift.currencyCode }}</td>
+                    {% if current_user.role == "employee" %}
+                        <td><a class="play_for_work material-icons"
+                               href={{ url_for('shifts.register', shift_id = shift.id) }}>play_for_work</a></td>
+                    {% endif %}
+                    {% if current_user.role != "employee" %}
+                        <td><a class="delete material-icons"
+                               href={{ url_for('shifts.delete', record_id = shift.id, object_type = 'shift') }}>delete</a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+
+    </table>
+
+{% endblock %}

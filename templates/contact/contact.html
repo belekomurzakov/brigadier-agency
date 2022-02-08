@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %} Contacts {% endblock %}
+
+{% block content %}
+    <h2>Contacts</h2>
+
+    <table id="companies">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Username</td>
+            <td>Birthdate</td>
+            <td>Role</td>
+            <td>Phone</td>
+            <td>Street</td>
+            <td>City</td>
+            <td>Country</td>
+            {% if current_user.role == "administrator" %}
+                <td><a class="delete material-icons">delete</a></td>
+            {% endif %}
+        </tr>
+        </thead>
+
+        <tbody>
+        {% if contacts | length == 0 %}
+            <div>Žádné příspěvky.</div>
+        {% else %}
+            {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.firstName }}</td>
+                    <td>{{ contact.lastName }}</td>
+                    <td>{{ contact.username }}</td>
+                    <td>{{ contact.birthdate_s }}</td>
+                    <td>{{ contact.userrole }}</td>
+                    <td>{{ contact.mobile }}</td>
+                    <td>{{ contact.street }}</td>
+                    <td>{{ contact.city }}</td>
+                    <td>{{ contact.country }}</td>
+                    {% if current_user.role == "administrator" %}
+                        <td><a class="delete material-icons"
+                               href={{ url_for('contacts.delete', record_id = contact.id) }}>delete</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+
+    </table>
+
+{% endblock %}

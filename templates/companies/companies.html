@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %} Companies {% endblock %}
+
+{% block content %}
+
+    <h2>Companies</h2>
+
+    {% if current_user.role != "employee" %}
+        <a href={{ url_for('companies.creation') }}>
+            <button id="create" type="submit" class="SignUpButton">Create Company</button>
+        </a>
+    {% endif %}
+
+    <table id="companies">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Sector</td>
+            <td>Created</td>
+            <td>Contact</td>
+            {% if current_user.role != "employee" %}
+                <td><a class="delete material-icons">delete</a></td>
+            {% endif %}
+        </tr>
+        </thead>
+
+        <tbody>
+        {% if items | length == 0 %}
+            <div>Žádné příspěvky.</div>
+        {% else %}
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.companyName }}</td>
+                    <td>{{ item.sector }}</td>
+                    <td>{{ item.as_string }}</td>
+                    <td>{{ item.firstName }}</td>
+                    {% if current_user.role != "employee" %}
+                        <td><a class="delete material-icons"
+                               href={{ url_for('companies.delete', record_id = item.id) }}>delete</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+
+    </table>
+
+{% endblock %}

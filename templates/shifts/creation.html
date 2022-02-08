@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %} Creation {% endblock %}
+
+{% block content %}
+    <h2>Add new shifts</h2>
+
+    {% if error %}
+        <div class="alert danger">
+            {{ error }}
+        </div>
+    {% endif %}
+
+
+    <form action="{{ url_for('shifts.creation_nd') }}" method="post">
+        <div class="container">
+            <label for="startTime"><b>Start Time</b></label>
+            <input id="form" name="startTime" type="datetime-local" value="{{ data.startTime }}"
+                   placeholder="Enter Start Time" required>
+
+            <label for="endTime"><b>End Time</b></label>
+            <input id="form" name="endTime" type="datetime-local" value="{{ data.endTime }}"
+                   placeholder="Enter End Time" required>
+
+            <label for="company"><b>Company</b></label>
+            <select name="company" id="company" required>
+                <option value="" selected disabled hidden>Choose here</option>
+                {% for position in positions %}
+                    <option value="{{ position.partnerId }}">{{ position.companyName }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" class="SignUpButton">Next Page</button>
+        </div>
+    </form>
+{% endblock %}

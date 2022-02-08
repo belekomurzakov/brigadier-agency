@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %} Positions {% endblock %}
+
+{% block content %}
+    <h2>Positions</h2>
+
+    {% if current_user.role != "employee" %}
+        <a href={{ url_for('positions.creation') }}>
+            <button id="create" type="submit" class="SignUpButton">Create Position</button>
+        </a>
+    {% endif %}
+
+    <table id="companies">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Company</td>
+            <td>Sector</td>
+            <td>Contact</td>
+            {% if current_user.role != "employee" %}
+                <td><a class="delete material-icons">delete</a></td>
+            {% endif %}
+        </tr>
+        </thead>
+
+        <tbody>
+        {% if positions | length == 0 %}
+            <div>No positions.</div>
+        {% else %}
+            {% for position in positions %}
+                <tr>
+                <td>{{ position.id }}</td>
+                <td><div id = "left-text-align">{{ position.name }}</div></td>
+                <td><div id = "left-text-align">{{ position.description }}</div></td>
+                <td><a href={{ url_for('companies.partner_list') }}>{{ position.companyName }}</a></td>
+                <td>{{ position.sector }}</td>
+                <td>{{ position.firstName }}</td>
+                {% if current_user.role != "employee" %}
+                    <td><a class="delete material-icons"
+                           href={{ url_for('positions.delete', record_id = position.id) }}>delete</a></td>
+                {% endif %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+
+    </table>
+
+{% endblock %}

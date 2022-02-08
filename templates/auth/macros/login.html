@@ -1,0 +1,23 @@
+{% macro login_form(small=False, data={}) %}
+    <form action="{{ url_for('auth.login_action') }}" method="post">
+        {% if small %}
+            <input name="username" class="dense" required>
+            <input type="password" name="password" class="dense" required>
+            <input type="submit" value="➤" class="dense">
+        {% else %}
+            <div class="container">
+                <label for="login-username"><b>Username</b></label>
+                <input id="login-username" type="text" placeholder="Enter Username"
+                       name="username"
+                       value="{{ data.username }}" required>
+
+                <label for="login-password"><b>Password</b></label>
+                <input id="login-password" type="password" placeholder="Enter Password"
+                       name="password"
+                       value="{{ data.password }}" required>
+
+                <button type="submit">Login</button>
+            </div>
+        {% endif %}
+    </form>
+{% endmacro %}

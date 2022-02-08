@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="cs">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <title>{% block title %}{% endblock %} - Flask</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+</head>
+
+<body>
+
+<! --- Navigation Bar --->
+<nav>
+    <div id="menu-toggle" class="hamburger material-icons">menu</div>
+
+    <div id="menu">
+        <a href="/">Home</a>
+        <a href="/companies">Companies</a>
+        <a href="/contacts">Contacts</a>
+        <a href="/positions">Positions</a>
+        <a href="/shifts">Shifts</a>
+        <a class="login material-icons" href={{ url_for('auth.login_form') }}>login</a>
+        <a class="logout material-icons" href={{ url_for('auth.logout') }}>logout</a>
+    </div>
+
+</nav>
+<! --- Navigation Bar --->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages | length > 0 %}
+        <div class="messages">
+            {% for category, message in get_flashed_messages(with_categories=true) %}
+                <div class="message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<! --- Main content --->
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+<! --- Main content --->
+
+
+<! --- Footer --->
+<footer id="contact">
+    <div>
+        <div id = "foot"><p>© 2021 Omurzakov, Inc. All rights reserved.</p></div>
+    </div>
+</footer>
+<! --- Footer --->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

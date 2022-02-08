@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %} Registration {% endblock %}
+
+{% block content %}
+    <h2>Create your account</h2>
+
+    {% if error %}
+        <div class="alert danger">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form action="{{ url_for('auth.registration') }}" method="post">
+        <div class="container">
+            <label for="firstName"><b>First Name</b></label>
+            <input id="firstName" name="firstName" type="text" value="{{ data.firstName }}"
+                   placeholder="Enter First Name" required>
+
+            <label for="lastName"><b>Last Name</b></label>
+            <input id="lastName" name="lastName" type="text" value="{{ data.lastName }}" placeholder="Enter Last Name"
+                   required>
+
+            <label for="username"><b>Username</b></label>
+            <input id="username" name="username" type="text" value="{{ data.username }}" placeholder="Enter Username"
+                   required minlength="5">
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" id="password" name="password" value="{{ data.password }}"
+                   placeholder="Enter Password" required minlength="5">
+
+            <label for="role"><b>Role</b></label>
+            <select name="role" id="role" required>
+                <option value="administrator" {{ 'selected' if data.role == 'administrator' }}>Administrator</option>
+                <option value="employee" {{ 'selected' if data.role == 'employee' }}>Employee</option>
+                <option value="partner" {{ 'selected' if data.role == 'partner' }}>Partner</option>
+            </select>
+
+            <label for="birthdate"><b>Birthdate</b></label>
+            <input type="date" id="birthdate" name="birthdate" value="{{ data.birthdate }}" required>
+
+            <label for="phone"><b>Phone</b></label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]+" value="{{ data.phone }}"
+                   placeholder="Enter Phone" required>
+
+            <label for="street"><b>Street</b></label>
+            <input id="street" name="street" type="text" value="{{ data.street }}"
+                   placeholder="Enter Street" required>
+
+            <label for="city"><b>City</b></label>
+            <input id="city" name="city" type="text" value="{{ data.city }}"
+                   placeholder="Enter City" required>
+
+            <label for="country"><b>Country</b></label>
+            <input id="country" name="country" type="text" value="{{ data.country }}"
+                   placeholder="Enter Country" required>
+
+            <button type="submit" class="SignUpButton">Sign Up</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from "auth/macros/login.html" import login_form %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+    {% if after_registration %}
+        <div class="alert success">
+            Success registration! Please login to system.
+        </div>
+    {% endif %}
+
+    {{ login_form(data=data) }}
+
+    <h4>Don't have an account yet? <a href="{{ url_for('auth.registration') }}">Sign up</a></h4>
+
+{% endblock %}

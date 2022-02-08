@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %} Company creation {% endblock %}
+
+{% block content %}
+
+    <h2>Do you want to add a new partner?</h2>
+
+    <form action="{{ url_for('companies.creation') }}" method="post">
+        <div class="container">
+            <label for="companyName"><b>Company Name</b></label>
+            <input id="companyName" type="text" name="companyName" value="{{ data.companyName }}" required>
+
+            <label for="sector"><b>Sector</b></label>
+            <select name="sector" id="company" required>
+                <option value="" selected disabled hidden>Choose here</option>
+                <option value="engineering" {{ 'selected' if data.sector == 'engineering' }}>Engineering</option>
+                <option value="finance" {{ 'selected' if data.sector == 'Finance' }}>Finance</option>
+                <option value="agriculture" {{ 'selected' if data.sector == 'agriculture' }}>Agriculture</option>
+                <option value="entertainment" {{ 'selected' if data.sector == 'entertainment' }}>Entertainment</option>
+                <option value="other" {{ 'selected' if data.sector == 'Other' }}>Other</option>
+            </select>
+
+            <button type="submit" class="SignUpButton">Add New Company</button>
+        </div>
+
+    </form>
+
+{% endblock %}
