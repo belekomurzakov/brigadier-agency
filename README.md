@@ -16,3 +16,9 @@ Enjoy:
 ```
 flask run
 ```
+
+## <p align="center">Entity–relationship model</p>
+<p align="center"><img src="https://github.com/belekomurzakov/brigadier-agency/blob/master/static/images/ER.png" alt="ER" width="600"/></p>
+
+## <p align="center">Use case diagram</p>
+<p align="center"><img src="https://github.com/belekomurzakov/brigadier-agency/blob/master/static/images/UseCase.png" alt="ER" width="600"/></p>
