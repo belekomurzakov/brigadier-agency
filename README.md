@@ -1,10 +1,9 @@
-# brigadier-agency
 ## How to run this project on your local machine?
 Create virtual environment:
 ```
 python -m venv venv
 ```
-Activate:
+Activate your virtual environment:
 ```
 source venv/bin/activate
 ```
