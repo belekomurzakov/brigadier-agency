@@ -20,5 +20,3 @@ app.register_blueprint(shifts.bp)
 
 if __name__ == '__main__':
     app.run()
-
-    # checking my commit on profile
