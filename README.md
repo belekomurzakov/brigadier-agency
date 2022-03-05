@@ -1,3 +1,11 @@
+# Brigadier agency
+Web application "Brigadier agency" built for my EBC-VWA - Web Applications Development course.
+
+## What I Learned
+- Implemented backend using the Flask framework in the Python programming language
+- Connected database to store and query data using SQLite
+- Designed dynamic web based on different roles and provided authentication process with proper security
+
 ## How to run this project on your local machine?
 Create virtual environment:
 ```
