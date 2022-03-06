@@ -24,6 +24,30 @@ Enjoy:
 flask run
 ```
 
+## Repo Structure
+```
+/
+├─ database/         # Database configuration and creating tables
+├─ helpers/          # User class and func for generation hash for password
+├─ static/           # Static resources
+│  ├─ images/ 
+│
+├─ template/         # HTML templates
+│  ├─ auth/       
+│  │  ├─ macros/  
+│  ├─ companies/  
+│  ├─ contact/    
+│  ├─ home/       
+│  ├─ positions/  
+│  ├─ shifts/     
+│
+├─ views/             # View functions
+├─ README.md          # This file
+├─ app.py             # Runner
+├─ config.py          # Configuration
+└─ requirements.txt   # Required librabries
+```
+
 ## <p align="center">Entity–relationship model</p>
 <p align="center"><img src="https://github.com/belekomurzakov/brigadier-agency/blob/master/static/images/ER.png" alt="ER" width="600"/></p>
 
