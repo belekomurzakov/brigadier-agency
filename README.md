@@ -9,19 +9,19 @@ Web application "Brigadier agency" built for my EBC-VWA - Web Applications Devel
 ## How to run this project on your local machine?
 Create virtual environment:
 ```
-python -m venv venv
+$ python -m venv venv
 ```
 Activate your virtual environment:
 ```
-source venv/bin/activate
+$ source venv/bin/activate
 ```
 Install required librabries from *requirements.txt*:
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 Enjoy:
 ```
-flask run
+$ flask run
 ```
 
 ## Repo Structure
